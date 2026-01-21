@@ -21,3 +21,10 @@ no-mark {
   padding: 2px 4px;
   font-weight: bold;
 }
+
+#main-container {
+    border: 15px solid black !important;
+    
+    width: 100vw;
+    height: 100vh;
+}

@@ -9,7 +9,7 @@ def fetch_data(url):
         print(f"An error occurred: {e}")
         return None 
 
-url = "https://gamma-api.polymarket.com/events?active=true&closed=false&limit=5"
+url = "https://gamma-api.polymarket.com/events?active=true&closed=true&limit=5"
 
 
 data = fetch_data(url)

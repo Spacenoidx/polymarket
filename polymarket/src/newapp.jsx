@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./assets/newapp.css";
+import "./newapp.css";
 const PolymarketEvents = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,7 @@ const PolymarketEvents = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <div id="main-container">
       <Container>
         <Row className="justify-content-center mt-4 mb-4">
           <h2 className="mb-2">Polymarket Events</h2>
@@ -65,7 +65,7 @@ const PolymarketEvents = () => {
               );
               setSelectedEvent(selected);
             }}
-          > <option>Select an Event</option>
+          > <option style={{fontWeight: "bold"}}>Select an Event</option>
             {data.map((datum, index) => (
               <option key={datum.id || index} value={datum.id}>
                 {datum.title}
@@ -82,6 +82,9 @@ const PolymarketEvents = () => {
                 <div>
                   <p id="description">{selectedEvent.description}</p>
                   <p>Volume: {selectedEvent.volume}</p>
+                  #convert timestamp to readable date
+                  
+                  <p>Started: {selectedEvent.startDate}</p>
                 </div>
               </Card.Body>
             </Card>
