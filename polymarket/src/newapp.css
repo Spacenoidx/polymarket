@@ -23,8 +23,16 @@ no-mark {
 }
 
 #main-container {
-    border: 15px solid black !important;
+    border: 15px double black !important;
     
     width: 100vw;
     height: 100vh;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: underline;
 }

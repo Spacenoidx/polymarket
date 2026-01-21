@@ -49,10 +49,10 @@ const PolymarketEvents = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div id="main-container">
+    <div>
       <Container>
         <Row className="justify-content-center mt-4 mb-4">
-          <h2 className="mb-2">Polymarket Events</h2>
+          <h1 className="mb-2">Polymarket Events</h1>
         </Row>
 
         <Row>
@@ -65,7 +65,7 @@ const PolymarketEvents = () => {
               );
               setSelectedEvent(selected);
             }}
-          > <option style={{fontWeight: "bold"}}>Select an Event</option>
+          > <option>Select an Event</option>
             {data.map((datum, index) => (
               <option key={datum.id || index} value={datum.id}>
                 {datum.title}
@@ -77,20 +77,20 @@ const PolymarketEvents = () => {
           {selectedEvent ? 
           (
             <Card className="mt-4">
-              <h2>{selectedEvent.title}</h2>
+              <h2 className="m-4g">{selectedEvent.title}</h2>
               <Card.Body>
                 <div>
                   <p id="description">{selectedEvent.description}</p>
                   <p>Volume: {selectedEvent.volume}</p>
-                  #convert timestamp to readable date
-                  
-                  <p>Started: {selectedEvent.startDate}</p>
                 </div>
               </Card.Body>
             </Card>
           ) : 
-          (
-            <p className="mt-4" >No event selected.</p>
+          (<>
+            <h3 className="mt-4" >No event selected.</h3>
+            <i>What's on your mind?</i>
+            </>
+
           )}
         </Row>
       </Container>
