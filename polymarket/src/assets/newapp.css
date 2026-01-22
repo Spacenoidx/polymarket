@@ -2,7 +2,7 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    border: 5px solid rebeccapurple !important;
+    border: 5px solid red !important;
 }
 #description {
     font-size: 18px;
@@ -10,29 +10,14 @@
     
 }
 
-.yes-mark {
+yes-mark {
   background-color: green !important;
   padding: 2px 4px;
   font-weight: bold;
 }
 
-.no-mark {
+no-mark {
   background-color: red !important;
   padding: 2px 4px;
   font-weight: bold;
-}
-
-#main-container {
-    border: 15px double black !important;
-    
-    width: 100vw;
-    height: 100vh;
-}
-
-h1 {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-    text-decoration: underline;
 }

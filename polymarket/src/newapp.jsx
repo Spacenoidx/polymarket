@@ -36,11 +36,17 @@ const PolymarketEvents = () => {
   }, []);
 
   useEffect(() => {
-    const descriptionEl = document.getElementById("description");
+    const descriptionEl = document.getElementsByClassName("description");
     if (descriptionEl && selectedEvent) {
       const text = selectedEvent.description;
-      const yesText = text.replace(/"yes"/gi, (match) => `<yes-mark>${match}</yes-mark>`);
-      const noText = yesText.replace(/"no"/gi, (match) => `<no-mark>${match}</no-mark>`);
+      const yesText = text.replace(
+        /"yes"/gi,
+        (match) => `<span class="yes-mark">${match}</span>`
+      );
+      const noText = yesText.replace(
+        /"no"/gi,
+        (match) => `<span class="no-mark">${match}</span>`
+      );
       descriptionEl.innerHTML = noText;
     }
   }, [selectedEvent]);
@@ -65,7 +71,9 @@ const PolymarketEvents = () => {
               );
               setSelectedEvent(selected);
             }}
-          > <option>Select an Event</option>
+          >
+            {" "}
+            <option>Select an Event</option>
             {data.map((datum, index) => (
               <option key={datum.id || index} value={datum.id}>
                 {datum.title}
@@ -74,23 +82,68 @@ const PolymarketEvents = () => {
           </Form.Select>
         </Row>
         <Row className="justify-content-center">
-          {selectedEvent ? 
-          (
+          {selectedEvent ? (
             <Card className="mt-4">
               <h2 className="m-4g">{selectedEvent.title}</h2>
               <Card.Body>
                 <div>
-                  <p id="description">{selectedEvent.description}</p>
                   <p>Volume: {selectedEvent.volume}</p>
+                  <p>
+                    Has had a total of{" "}
+                    <strong>{selectedEvent?.markets?.length || 0}</strong>{" "}
+                    markets.
+                  </p>
+                  <p>
+                    Currently,{" "}
+                    <strong>
+                      {selectedEvent?.markets?.filter(
+                        (market) => market.closed == false
+                      ).length || 0}
+                    </strong>{" "}
+                    markets are open.
+                  </p>
+                  <p> Comment Count: {selectedEvent.commentCount}</p>
+                  {selectedEvent?.markets &&
+                  selectedEvent.markets.length > 0 ? (
+                    <ol>
+                      {selectedEvent.markets
+                        .filter((market) => market.closed == false)
+                        .map((market, index) => (
+                          <li key={index}>
+                            <strong>Market ID: {market.id}</strong>:{" "}
+                            <span className="description">
+                              {market.description}
+                            </span>
+                            <p className="mt-2" style={{ color: "red" }}>
+                              End Date:{" "}
+                              {market.endDate
+                                ? new Date(market.endDate).toLocaleString()
+                                : "Date not found."}
+                            </p>
+                            <p>Volume: {market.volume}</p>
+                            <p>
+                              <a
+                                href={`https://polymarket.com/event/${selectedEvent.slug}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                View Market
+                              </a>
+                            </p>
+                          </li>
+                        ))}
+                    </ol>
+                  ) : (
+                    <p>No markets available for this event.</p>
+                  )}
                 </div>
               </Card.Body>
             </Card>
-          ) : 
-          (<>
-            <h3 className="mt-4" >No event selected.</h3>
-            <i>What's on your mind?</i>
+          ) : (
+            <>
+              <h3 className="mt-4">No event selected.</h3>
+              <i>What's on your mind?</i>
             </>
-
           )}
         </Row>
       </Container>
